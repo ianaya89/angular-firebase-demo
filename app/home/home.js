@@ -10,34 +10,37 @@ angular.module('myApp.home', ['ngRoute','firebase'])
 }])
 
 .controller('HomeCtrl', ['$scope','$location','CommonProp','$firebaseAuth',function($scope,$location,CommonProp,$firebaseAuth) {
- var firebaseObj = new Firebase("https://blistering-heat-2473.firebaseio.com");
+    var firebaseObj = new Firebase(FB_URL);
     var loginObj = $firebaseAuth(firebaseObj);
-  
-  $scope.user = {};
-  $scope.SignIn = function(e) {
-    e.preventDefault();
-    var username = $scope.user.email;
-    var password = $scope.user.password;
-    loginObj.$authWithPassword({
+    var login = {};
+
+    $scope.signIn = function(e) {
+        e.preventDefault();
+        var username = $scope.user.email;
+        var password = $scope.user.password;
+        loginObj.$authWithPassword({
             email: username,
             password: password
         })
         .then(function(user) {
-            //Success callback
             console.log('Authentication successful');
-	CommonProp.setUser(user.password.email);
-		$location.path('/welcome');
+            localStorage.setItem('user', JSON.stringify(user));
+            CommonProp.setUser(user);
+           $location.path('/welcome');
         }, function(error) {
-            //Failure callback
             console.log('Authentication failure');
         });
-}
+    }
 }])
+
 .service('CommonProp', function() {
     var user = '';
  
     return {
         getUser: function() {
+            if (!user) {
+                user = JSON.parse(localStorage.getItem('user'));
+            }
             return user;
         },
         setUser: function(value) {

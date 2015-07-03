@@ -1,5 +1,7 @@
 'use strict';
 
+window.FB_URL = 'http://luminous-torch-4257.firebaseio.com';
+
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',

@@ -14,10 +14,10 @@ angular.module('myApp.addPost', ['ngRoute'])
 	var title = $scope.article.title;
         var post = $scope.article.post;
 	
-	var firebaseObj = new Firebase("https://blistering-heat-2473.firebaseio.com/Articles");
+	var firebaseObj = new Firebase(FB_URL + "/posts");
     	var fb = $firebase(firebaseObj);
 
-	fb.$push({ title: title,post: post,emailId: CommonProp.getUser() }).then(function(ref) {
+	fb.$push({ title: title,post: post,emailId: CommonProp.getUser().password.email }).then(function(ref) {
   		console.log(ref); 
 		$location.path('/welcome');
 	}, function(error) {

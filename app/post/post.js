@@ -1,16 +1,16 @@
 'use strict';
 
-angular.module('myApp.addPost', ['ngRoute'])
+angular.module('myApp.post', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/addPost', {
-    templateUrl: 'addPost/addPost.html',
-    controller: 'AddPostCtrl'
+  $routeProvider.when('/post', {
+    templateUrl: 'post/post.html',
+    controller: 'PostCtrl'
   });
 }])
 
-.controller('AddPostCtrl', ['$scope','$firebase','$location','CommonProp',function($scope,$firebase,$location,CommonProp) {
-    $scope.AddPost = function(){
+.controller('PostCtrl', ['$scope','$firebase','$location','CommonProp',function($scope,$firebase,$location,CommonProp) {
+    $scope.addPost = function(){
 	var title = $scope.article.title;
         var post = $scope.article.post;
 	

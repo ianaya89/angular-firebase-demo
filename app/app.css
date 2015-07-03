@@ -1,3 +1,7 @@
 header {
-  margin-bottom: 50px;
+  margin-bottom: 100px;
+}
+
+.jumbotron {
+  text-align: center;
 }
